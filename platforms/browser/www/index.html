@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Vue project</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+  <!-- navigation bar -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <a class="navbar-brand"><i class="glyphicon glyphicon-eye-open"></i>I've seen things...</a>
+    </div>
+  </nav>
+
+  <!-- main body of our application -->
+  <div class="container" id="things">
+
+    <!-- add a thing form -->
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+          <h3>>Add a thing</h3>
+        </div>
+
+        <div class="panel-body">
+                <!-- CONTENT START -->
+                <div class="form-group">
+                  <input class="form-control" placeholder="Thing Name" v-model="thing.name">
+                </div>
+
+                <div class="form-group">
+                  <textarea class="form-control" placeholder="Thing Description" v-model="thing.description"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <input type="date" class="form-control" placeholder="Date" v-model="thing.date">
+                </div>
+
+                <button class="btn btn-primary" v-on:click="addThing">Submit</button>
+
+                <!-- CONTENT END -->
+
+
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- show the things -->
+    <div class="col-sm-6">
+      
+      <div class="list-group">
+            <!-- CONTENT START -->
+
+              <a href="#" class="list-group-item" v-for="thing in things">
+                <h4 class="list-group-item-heading">
+                  <i class="glyphicon glyphicon-eye-open"></i>
+                  {{ thing.name }}
+                </h4>
+
+                <h5>
+                  <i class="glyphicon glyphicon-calendar" v-if="thing.date"></i>
+                  {{ thing.date }}
+                </h5>
+
+                <p class="list-group-item-text" v-if="thing.description">{{ thing.description }}</p>
+
+                <button class="btn btn-xs btn-danger" v-on:click="deleteThing($index)">Delete</button>
+              </a>
+            <!-- CONTENT END -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
