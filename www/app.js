@@ -13,12 +13,14 @@ new Vue({
 
 
   // Anything within the ready function will run when the application loads
-  ready: function() {
+  // ready: function() {
+  mounted: function() {
     // When the application loads, we want to call the method that initializes
     // some data
     this.fetchThings();
     console.log("ready");
   },
+
 
   // Methods we want to use in our application are registered here
   methods: {
@@ -39,10 +41,13 @@ new Vue({
           date: '2012-12-12'
         }
       ];
-      console.log(things);
+
       // $set is a convenience method provided by Vue that is similar to pushing
       // data onto an array
-      this.$set('things', things);
+      this.$set(things, this.things);
+
+      console.log(things);
+      // this.$set(this.path.to.object, propName, valueFromStore);
     },
 
     // Adds a thing to the existing things array
@@ -55,7 +60,8 @@ new Vue({
     deleteThing: function(index) {
       if(confirm("Are you sure you want to delete this thing?")) {
         // $remove is a Vue convenience method similar to splice
-        this.things.$remove(index);
+        // this.things.$remove(thing);
+        this.things.splice(index,1);
       }
     }
 
